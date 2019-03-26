@@ -7,7 +7,7 @@ import time
 import subprocess 
 from dns.resolver import query
 
-epoch = str(time.time())
+epoch = str(time.time()).split('.')[0]
 
 
 trueowncmd = 'sudo cat /etc/trueuserowners'
@@ -55,15 +55,15 @@ for owner in ownDict.keys():
             resDict[owner][acct].append(dom)
 
 
-logfile = open(epoch + '.resrep',  "a+")
 for res in resDict.keys():
     for act in resDict[res].keys():
         for dom in resDict[res][act]:
             for rec in ['A', 'NS', 'SOA']:
                 try:
                     for rep in query(dom, rec):
+                        logfile = open(epoch + '.resrep',  "a+")
                         logfile.write("|".join([res, act, dom, rec, rep]))
+                        logfile.close()
                 except:
                     nf = True
 
-            
