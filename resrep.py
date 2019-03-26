@@ -56,6 +56,9 @@ for owner in ownDict.keys():
 
 logfile = open('.test',  "a+")
 for res in resDict.keys():
+    print ('\033[0;32m' + res + '\033[0m')
     for act in resDict[res].keys():
+        print('\033[0;33m  ' + act + '\033[0m')
         for dom in resDict[res][act]:
-            logfile.write("|".join([res, act, dom]) + '\n') 
+            print('\033[0;37m      ' + dom + '\033[0m')
+            
