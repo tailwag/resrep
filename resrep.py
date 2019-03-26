@@ -60,10 +60,10 @@ for res in resDict.keys():
         for dom in resDict[res][act]:
             for rec in ['A', 'NS', 'SOA']:
                 try:
+                    logfile = open(epoch + '.resrep',  "a+")
                     for rep in query(dom, rec):
-                        logfile = open(epoch + '.resrep',  "a+")
                         logfile.write("|".join([res, act, dom, rec, rep]))
-                        logfile.close()
+                    logfile.close()
                 except:
                     nf = True
 
