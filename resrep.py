@@ -45,6 +45,15 @@ for line in domList:
 
 
 
+out = open('out', "a+")
+out.write('henlo\n')
+out.close()
+out = open('out', "a+")
+out.write('henlo\n')
+out.close()
+out = open('out', "a+")
+out.write('henlo\n')
+out.close()
 
 resDict = {}
 for owner in ownDict.keys():
@@ -54,16 +63,20 @@ for owner in ownDict.keys():
 	for dom in domDict[acct]:
             resDict[owner][acct].append(dom)
 
-
+outList = ['', '', '', '', '']
 for res in resDict.keys():
+    outList[0] = str(res)
     for act in resDict[res].keys():
+	outList[1] = str(act)
         for dom in resDict[res][act]:
+	    outList[2] = str(dom)
             for rec in ['A', 'NS', 'SOA']:
+		outList[3] = str(rec)
                 try:
-                    logfile = open(epoch + '.resrep',  "a+")
                     for rep in query(dom, rec):
-                        logfile.write("|".join([res, act, dom, rec, rep]))
-                    logfile.close()
+			outList[4] = str(rep)
+			outFile = open(str(epoch), "a+")
+			outFile.write(str("|".join(outList) + '\n'))
+			outFile.close()
                 except:
                     nf = True
-
